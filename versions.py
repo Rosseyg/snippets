@@ -1,17 +1,22 @@
 import sys
-
-print(sys.version)
-print(sys.version_info)
-print(sys.version_info.major)
-print(sys.version_info.minor)
-print(sys.version_info.micro)
-print(sys.executable)
-print(sys.path)
-print(sys.platform)
-# print current python modules
-#print(sys.modules)
-
-#print django location and version
+import pip
 import django
-print(django.__file__)
-print(django.get_version())
+
+def print_version_and_location(module_name, module):
+    version = getattr(module, '__version__', 'N/A')
+    location = getattr(module, '__file__', 'N/A')
+    print(f"{module_name} version: {version}")
+    print(f"{module_name} location: {location}\n")
+
+def main():
+    # Python
+    print_version_and_location("Python", sys)
+
+    # Pip
+    print_version_and_location("Pip", pip)
+
+    # Django
+    print_version_and_location("Django", django)
+
+if __name__ == "__main__":
+    main()
